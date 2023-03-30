@@ -12,6 +12,7 @@ public class Books
     // instance variables
     private HashMap<Integer, Book> booksMap; // declare the hashmap
     private int currBookId;         // store the current id of book being added
+    private Book currBook;          // store the instance of the found book
 
     /**
      * Constructor for objects of class Books
@@ -43,16 +44,24 @@ public class Books
     }
     
     /**
-     * looks for book in hashMap
-     * return boolean if found
+     * Looks for book in hashmap
+     * @return boolean if found
      */
     public boolean findBook(String name) {
         for (int bookId : booksMap.keySet()) {
-            if (booksMap.get(bookId).getName().equals(name)) // hashmap, key of hashmap, get the name of book
-            {
+            if (booksMap.get(bookId).getName().equals(name)) {
+                currBook = booksMap.get(bookId);
                 return true;
             }
         }
-        return false;
+        return false; // if not found
+    }
+    
+    /**
+     * Getter for current Book
+     * @return Book the found book instance
+     */
+    public Book getBook() {
+        return this.currBook;
     }
 }

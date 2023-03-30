@@ -9,7 +9,7 @@ public class GUI
 {
     // instance variables
     private Books books;
-    
+    private Book book;  // Store the current book instance
 
     /**
      * Constructor for objects of class GUI
@@ -21,7 +21,7 @@ public class GUI
         UI.initialise();
         //UI.addButton("All", books::printAll);
         UI.addButton("Add", this::addBook);
-        //UI.addButton("Find", this::findBook);
+        UI.addButton("Find", this::findBook);
         UI.addButton("Quit", UI::quit);
     }
 
@@ -44,12 +44,22 @@ public class GUI
         books.addBook(name, author, quantity, imgFileName);
     }
     
+    
     /**
-     * find book based on name
-     * prints out the author, qty and book cover if found
+     * Finds book based on name
+     * Prints out the author, qty and book cover if found
      */
     public void findBook() {
         String bookName = UI.askString("Name of book: ");
         if (books.findBook(bookName)) {
+            UI.println("Found book!");
+            book = books.getBook();
+            UI.println("Author: " + book.getAuthor());
+            UI.println("Quantity: " + book.getQuantity());
+            book.displayBook(); // Show book cover
+        } else {
+            UI.println("Book not found!");
         }
+        
     }
+}

@@ -1,3 +1,4 @@
+import ecs100.*;
 /**
  * Support class of Book
  * A book contains an name, author, qty, image
@@ -12,7 +13,7 @@ public class Book
     private String author;
     private int quantity;
     private String image;
-    private static final String DEFAULT_IMAGE = "book.jpg";
+    private static final String DEFAULT_IMAGE = "book_face.jpg";
     
     /**
      * Constructor for objects of class Book
@@ -41,11 +42,31 @@ public class Book
         this(nm, auth, qty, null);
     }
 
-    /** 
-     * getter for name
-     * return string the name of book
+    /**
+     * Getter for name
+     * @return String the name of book
      */
-    public String getName(){
+    public String getName() {
         return this.name;
+    }
+    
+    /**
+     * Display image on GUI
+     */
+    public void displayBook() {
+        int locX = 100;
+        int locY = 100;
+        final double WIDTH = 100;
+        final double HEIGHT = 100;
+       
+        UI.drawImage(this.image, locX, locY, WIDTH, HEIGHT);
+    }
+    
+    public String getAuthor() {
+        return this.author;
+    }
+    
+    public int getQuantity() {
+        return this.quantity;
     }
 }
