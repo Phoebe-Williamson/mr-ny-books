@@ -3,8 +3,8 @@ import ecs100.*;
  * Support class of Book
  * A book contains an name, author, qty, image
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Phoebe WIlliamosn)
+ * @version (3/4/23)
  */
 public class Book
 {
@@ -13,17 +13,27 @@ public class Book
     private String author;
     private int quantity;
     private String image;
-    private static final String DEFAULT_IMAGE = "book_face.jpg";
+    private int pages;
+    private int year;
+    private String genre;
+    private int locX = 50;
+    private int locY = 50;
+    private final double WIDTH = 220;
+    private final double HEIGHT = 300;
+    private static final String DEFAULT_IMAGE = "book.jpg";
     
     /**
      * Constructor for objects of class Book
      */
-    public Book(String nm, String auth, int qty, String img)
+    public Book(String nm, String auth, int qty, int pgs, int year, String genre, String img)
     {
         // initialise instance variables
         this.name = nm;
         this.author = auth;
         this.quantity = qty;
+        this.pages = pgs;
+        this.year = year;
+        this.genre = genre;
         
         // If the user selects cancel instead of giving image
         if (img == null) {
@@ -36,10 +46,10 @@ public class Book
     /**
      * Constructor overloading for objects of class Book
      */
-    public Book(String nm, String auth, int qty)
+    public Book(String nm, String auth, int qty, int pgs, int year, String genre)
     {
         // initialise instance variables
-        this(nm, auth, qty, null);
+        this(nm, auth, qty, pgs, year, genre, null);
     }
 
     /**
@@ -54,12 +64,7 @@ public class Book
      * Display image on GUI
      */
     public void displayBook() {
-        int locX = 100;
-        int locY = 100;
-        final double WIDTH = 100;
-        final double HEIGHT = 100;
-       
-        UI.drawImage(this.image, locX, locY, WIDTH, HEIGHT);
+        UI.drawImage(this.image, this.locX, this.locY, this.WIDTH, this.HEIGHT);
     }
     
     public String getAuthor() {
@@ -69,4 +74,26 @@ public class Book
     public int getQuantity() {
         return this.quantity;
     }
+    
+    public int getPages() {
+        return this.pages;
+    }
+    
+    public int getYear(){
+        return this.year;
+    }
+    
+    public String getGenre(){
+        return this.genre;
+    }
+    
+    public boolean isOnBook(double x, double y) {
+        if ((x >= locX) && (x <= locX + WIDTH) && ( y >= locY) && ( y <= locY + HEIGHT)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
 }

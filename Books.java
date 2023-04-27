@@ -4,8 +4,8 @@ import ecs100.*;
  * Holds collection of books in a hashmap
  * Allows a user to add, find, print all
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Phoebe Williamosn)
+ * @version (3/4/23)
  */
 public class Books
 {
@@ -23,9 +23,9 @@ public class Books
         booksMap = new HashMap<Integer, Book>();    // initialise hashmap
         
         // Create some books
-        Book b1 = new Book("Cellphone", "Stephen King", 86);
-        Book b2 = new Book("Pet Semetary", "Stephen King", 68);
-        Book b3 = new Book("1984", "George Orwell", 63);
+        Book b1 = new Book("CELLPHONE", "STEPHEN KING",3, 86, 2016, "HORROR");
+        Book b2 = new Book("PET CEMETARY", "Stephen King", 3, 68, 1903, "HISTORY");
+        Book b3 = new Book("1984", "GEORGE ORWELL",3 , 63, 1949, "HISTORY");
         
         // Add books to collection
         booksMap.put(1, b1);
@@ -38,9 +38,9 @@ public class Books
     /**
      * Adds book to hashmap
      */
-    public void addBook(String nm, String auth, int qty, String img){
+    public void addBook(String nm, String auth, int qty, int pgs, int year, String genre,  String img){
         currBookId++;   // increment book id
-        booksMap.put(currBookId, new Book(nm, auth, qty, img));
+        booksMap.put(currBookId, new Book(nm, auth, qty, pgs, year, genre, img));
     }
     
     /**
@@ -55,6 +55,23 @@ public class Books
             }
         }
         return false; // if not found
+    }
+    
+    /**
+     * prints all books in hashmap
+     */
+    public void printAll() {
+        System.out.println("Here are all of the books in the library");
+        for (int bookId : booksMap.keySet()) {
+            currBook = booksMap.get(bookId);
+            UI.println("-------------------");
+            UI.println("Title: " + currBook.getName());
+            UI.println("Author: " + currBook.getAuthor());
+            UI.println("Quantity: " + currBook.getQuantity());
+            UI.println("Pages: " + currBook.getPages());
+            UI.println("Year Published: " + currBook.getYear());
+            UI.println("Genre: " + currBook.getGenre());
+        }
     }
     
     /**

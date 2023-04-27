@@ -2,8 +2,8 @@ import ecs100.*;
 /**
  * Class to handle the GUI functionality
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Phoebe Williamsomn)
+ * @version (3/4/23)
  */
 public class GUI
 {
@@ -19,10 +19,26 @@ public class GUI
         // initialise instance variables
         books = new Books();
         UI.initialise();
+        UI.setMouseListener(this::doMouse);
+        
+        
         //UI.addButton("All", books::printAll);
         UI.addButton("Add", this::addBook);
         UI.addButton("Find", this::findBook);
+        UI.addButton("Print all books", this::printBooks);
+        UI.addButton("Clear", this::clearAll);
         UI.addButton("Quit", UI::quit);
+        
+        UI.println("Welcome to the book manager. \nClick a button to start your advernture!");
+    }
+    
+    /**
+     * clear
+     */
+    public void clearAll(){
+        UI.clearText();
+        UI.clearGraphics();  
+        book = null;
     }
 
     /**
@@ -36,8 +52,8 @@ public class GUI
         final int MAX_YEAR = 2023;
         
         // Ask the user for details
-        String name = UI.askString("Enter the book Title: ");
-        String author = UI.askString("enter the Author: ");
+        String name = UI.askString("Enter the book Title: ").toUpperCase();
+        String author = UI.askString("enter the Author: ").toUpperCase();
         
         boolean getQty = true;
         int quantity = UI.askInt("Enter Quantity of books in the library: ");
@@ -69,7 +85,7 @@ public class GUI
             }
         }
         
-        String genre = UI.askString("What is the genre of the book: ");
+        String genre = UI.askString("What is the genre of the book: ").toUpperCase();
         
         // add a book image for display in GUI
         String imgFileName = UIFileChooser.open("Choose Image File: ");
@@ -78,28 +94,60 @@ public class GUI
     }
     
     /**
-     * delet book from collection
+     * delete book from collection
      */
+    public void removeBook() {
+        String bookName = UI.askString("Name of book: ");
+        if(books.findBook(bookName.toUpperCase())) {
+            
+        }
+        
+    }
     
     /**
      * Finds book based on name
      * Prints out the author, qty and book cover if found
      */
     public void findBook() {
-        String bookName = UI.askString("Name of book: ");
+        String bookName = UI.askString("Name of book: ").toUpperCase();
         if (books.findBook(bookName)) {
+            UI.println("-------------------");
             UI.println("Found book!");
             book = books.getBook();
             UI.println("Author: " + book.getAuthor());
             UI.println("Quantity: " + book.getQuantity());
+            UI.println("Pages: " + book.getPages());
+            UI.println("Year Published: " + book.getYear());
+            UI.println("Genre: " + book.getGenre());
             book.displayBook(); // Show book cover
         } else {
             UI.println("Book not found!");
         }
-        
     }
     
     /**
      * mouse listener
      */
+    private void doMouse(String action, double x, double y) {
+        if (action.equals("clicked")) {
+           if (book != null){
+               if (book.isOnBook(x,y)) {
+                   UI.println("-------------------");
+                   UI.println("Title: " + book.getName());
+                   UI.println("Author: " + book.getAuthor());
+                   UI.println("Quantity: " + book.getQuantity());
+                   UI.println("Pages: " + book.getPages());
+                   UI.println("Year Published: " + book.getYear());
+                   UI.println("Genre: " + book.getGenre());
+               }
+           }
+        }
+    }
+    
+    /** 
+     * calls method in books to print out all books
+     */
+    public void printBooks() {  
+        books.printAll();
+    }   
 }
