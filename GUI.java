@@ -48,19 +48,43 @@ public class GUI
     public void addBook() {
         final int MAX_QUANTITY = 999;
         final int MIN_QUANTITY = 1;
-        final int MIN_YEAR = 1700;
+        final int MIN_YEAR = 1;
         final int MAX_YEAR = 2023;
+        String[] genres = {"ROMANCE", "HORROR", "COMEDY", "SCIFI", "HISTORICAL FICTION", "FICTION", 
+                            "MYSTERY", "CHILDRENS", "ACTION", "NATURE", "POETRY"};
         
-        // Ask the user for details
+        // Ask the user for detail
+        boolean getName = true;
         String name = UI.askString("Enter the book Title: ").toUpperCase();
-        String author = UI.askString("enter the Author: ").toUpperCase();
+        while(getName){
+            if(name.equals("")){
+                name = UI.askString("Enter the book title: ").toUpperCase();
+            }else{
+                getName = false;
+            }
+        }
+        
+        boolean getAuthor = true;
+        String author = UI.askString("Enter the Author: ").toUpperCase();
+        while(getAuthor){
+            if(author.equals("")) {
+                author = UI.askString("Enter the Author: ").toUpperCase();
+            }else{
+                getAuthor = false;
+            }
+        }
         
         boolean getQty = true;
-        int quantity = UI.askInt("Enter Quantity of books in the library: ");
+        Integer quantity = UI.askInt("Enter Quantity of books in the library: ");
         while (getQty){
             if (quantity > MAX_QUANTITY || quantity < MIN_QUANTITY) {
-                quantity = UI.askInt("Enter Quantity of books in the library (between 1 - 999): ");
-            } else{
+                quantity = UI.askInt("Enter Quantity of books in numbers in the library (between 1 - 999): ");
+            }else if(quantity.equals(null)){
+                UI.println("You stupid");
+            }else if(quantity.equals("")){
+                quantity = UI.askInt("Enter Quantity of books in the library: ");
+            }
+            else{
                 getQty = false;
             }
         }
@@ -70,22 +94,35 @@ public class GUI
         while (getPgs){
             if (pages > MAX_QUANTITY || pages < MIN_QUANTITY) {
                 pages = UI.askInt("Enter the number of pages in the book (between 1 - 999): ");
-            } else{
+            }
+            else{
                 getPgs = false;
             }
         }
         
         Boolean getYear = true;
-        int years = UI.askInt("Enter the year thee book was published: ");
+        int years = UI.askInt("Enter the year the book was published: ");
         while (getYear){
             if (years > MAX_YEAR || years < MIN_YEAR) {
-                years = UI.askInt("Enter the year the book was published (between 1700 - 2023): ");
+                years = UI.askInt("Enter the year the book was published (between 1 - 2023): ");
             } else{
                 getYear = false;
             }
         }
         
+        
+        boolean getGenre = true;
+        UI.println("Pick from one of these genres: ROMANCE, HORROR, COMEDY, SCIFI,");
+        UI.println("HISTORICAL FICTION, FICTION, MYSTERY, CHILDRENS, ACTION, NATURE, POETRY");
         String genre = UI.askString("What is the genre of the book: ").toUpperCase();
+        while (getGenre) {
+            if (genre.equals(genres)){
+                getGenre = false;
+            }else{
+                UI.println("Please enter the genre of the book from the options above");
+            }
+        }
+        
         
         // add a book image for display in GUI
         String imgFileName = UIFileChooser.open("Choose Image File: ");
@@ -103,6 +140,23 @@ public class GUI
         }
         
     }
+    
+    /**
+     * change the quantity of the number of books in library
+     
+    public void changeQty(){
+        final int MAX_QUANTITY = 999;
+        final int MIN_QUANTITY = 1;
+        
+        // asks the name of the book that the user wants to change the quantity of
+        String nameOfBooks = UI.askString("Name of book: ").toUpperCase();
+        if (books.changeQty(nameOfBooks)) {
+            UI.println("-------------------");
+            UI.println("Found book!");
+            book = books.getBook();
+        }
+    }
+    */
     
     /**
      * Finds book based on name
