@@ -26,7 +26,7 @@ public class GUI
         UI.addButton("Add", this::addBook);
         UI.addButton("Find", this::findBook);
         UI.addButton("Print all books", this::printBooks);
-        UI.addButton("Clear", this::clearAll);
+        UI.addButton("Clear text", this::clearAll);
         UI.addButton("Quit", UI::quit);
         
         UI.println("Welcome to the book manager. \nClick a button to start your advernture!");
@@ -75,14 +75,10 @@ public class GUI
         }
         
         boolean getQty = true;
-        Integer quantity = UI.askInt("Enter Quantity of books in the library: ");
+        int quantity = UI.askInt("Enter Quantity of books in the library: ");
         while (getQty){
             if (quantity > MAX_QUANTITY || quantity < MIN_QUANTITY) {
                 quantity = UI.askInt("Enter Quantity of books in numbers in the library (between 1 - 999): ");
-            }else if(quantity.equals(null)){
-                UI.println("You stupid");
-            }else if(quantity.equals("")){
-                quantity = UI.askInt("Enter Quantity of books in the library: ");
             }
             else{
                 getQty = false;
@@ -105,7 +101,8 @@ public class GUI
         while (getYear){
             if (years > MAX_YEAR || years < MIN_YEAR) {
                 years = UI.askInt("Enter the year the book was published (between 1 - 2023): ");
-            } else{
+            }
+            else{
                 getYear = false;
             }
         }
@@ -116,10 +113,13 @@ public class GUI
         UI.println("HISTORICAL FICTION, FICTION, MYSTERY, CHILDRENS, ACTION, NATURE, POETRY");
         String genre = UI.askString("What is the genre of the book: ").toUpperCase();
         while (getGenre) {
-            if (genre.equals(genres)){
-                getGenre = false;
-            }else{
-                UI.println("Please enter the genre of the book from the options above");
+            for (String g : genres){
+                if (genre.equals(g)){
+                    getGenre = false;
+                }
+            }
+            if (getGenre == true){
+                    genre = UI.askString("Please enter the genre of the book from the options above").toUpperCase();
             }
         }
         
