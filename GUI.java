@@ -27,6 +27,7 @@ public class GUI
         UI.addButton("Find", this::findBook);
         UI.addButton("Print all books", this::printBooks);
         UI.addButton("Delete book", this::deleteBook);
+        UI.addButton("Change quantity of books", this::changeQty);
         UI.addButton("Clear text", this::clearAll);
         UI.addButton("Quit", UI::quit);
         
