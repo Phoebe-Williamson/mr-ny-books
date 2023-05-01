@@ -26,6 +26,7 @@ public class GUI
         UI.addButton("Add", this::addBook);
         UI.addButton("Find", this::findBook);
         UI.addButton("Print all books", this::printBooks);
+        UI.addButton("Delete book", this::deleteBook);
         UI.addButton("Clear text", this::clearAll);
         UI.addButton("Quit", UI::quit);
         
@@ -133,30 +134,67 @@ public class GUI
     /**
      * delete book from collection
      */
-    public void removeBook() {
-        String bookName = UI.askString("Name of book: ");
-        if(books.findBook(bookName.toUpperCase())) {
-            
+    public void deleteBook(){
+        final int MAX_QUANTITY = 999;
+        final int MIN_QUANTITY = 1;
+        
+        // asks the name of the book that the user wants to change the quantity of
+        String bookName = UI.askString("Name of book: ").toUpperCase();
+        if (books.findBook(bookName)) {
+            UI.println("-------------------");
+            UI.println("Found book!");
+            book = books.getBook();
+            books.removeBook(bookName);
+            UI.println("Books has been removed.");
+        }else{
+            UI.println("book not found");
         }
         
     }
     
     /**
      * change the quantity of the number of books in library
-     
+    */
     public void changeQty(){
         final int MAX_QUANTITY = 999;
         final int MIN_QUANTITY = 1;
         
         // asks the name of the book that the user wants to change the quantity of
-        String nameOfBooks = UI.askString("Name of book: ").toUpperCase();
-        if (books.changeQty(nameOfBooks)) {
+        String bookName = UI.askString("Name of book you want to change quantity: ").toUpperCase();
+        if (books.findBook(bookName)) {
             UI.println("-------------------");
             UI.println("Found book!");
             book = books.getBook();
+            
+            // asks for the new quantity
+            boolean getQty = true;
+            int quantity = UI.askInt("Enter Quantity of books in the library: ");
+            while (getQty){
+                if (quantity > MAX_QUANTITY || quantity < MIN_QUANTITY) {
+                    quantity = UI.askInt("Enter Quantity of books in numbers in the library (between 1 - 999): ");
+                }else if (quantity == book.getQuantity()) {
+                    UI.println("That is the old quantity");
+                    quantity = UI.askInt("Enter a new quantity: ");
+                }else{
+                    getQty = false;
+                }
+            }
+            
+            String name=  book.getName();
+            String author = book.getAuthor();
+            int pages = book.getPages();
+            int years = book.getYear();
+            String genre = book.getGenre();
+            String imgFileName = book.getImage();
+            
+            books.removeBook(bookName);
+            
+            books.addBook(name, author, quantity, pages, years, genre, imgFileName);
+        }else{
+            UI.println("book not found");
         }
     }
-    */
+    
     
     /**
      * Finds book based on name
