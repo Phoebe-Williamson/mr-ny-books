@@ -24,7 +24,7 @@ public class Books
         
         // Create some books
         Book b1 = new Book("CELLPHONE", "STEPHEN KING",3, 86, 2016, "HORROR");
-        Book b2 = new Book("PET CEMETARY", "Stephen King", 3, 68, 1903, "HISTORY");
+        Book b2 = new Book("PET CEMETARY", "STEPHEN KING", 3, 68, 1903, "HISTORY");
         Book b3 = new Book("1984", "GEORGE ORWELL",3 , 63, 1949, "HISTORY");
         
         // Add books to collection
@@ -80,5 +80,16 @@ public class Books
      */
     public Book getBook() {
         return this.currBook;
+    }
+    
+    /**
+     * 
+     */
+    public void removeBook(String name) {
+        for (int BookID : booksMap.keySet()) {
+            if (booksMap.get(BookID).getName().toUpperCase().equals(name)) {
+                booksMap.remove(BookID);
+            }
+        }
     }
 }
