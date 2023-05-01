@@ -87,6 +87,10 @@ public class Book
         return this.genre;
     }
     
+    public String getImage() {
+        return this.image;
+    }
+    
     public boolean isOnBook(double x, double y) {
         if ((x >= locX) && (x <= locX + WIDTH) && ( y >= locY) && ( y <= locY + HEIGHT)) {
             return true;
