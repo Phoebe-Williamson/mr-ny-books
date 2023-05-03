@@ -61,7 +61,7 @@ public class Books
      * prints all books in hashmap
      */
     public void printAll() {
-        System.out.println("Here are all of the books in the library");
+        UI.println("Here are all of the books in the library");
         for (int bookId : booksMap.keySet()) {
             currBook = booksMap.get(bookId);
             UI.println("-------------------");
