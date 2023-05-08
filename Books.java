@@ -1,21 +1,20 @@
 import java.util.HashMap;
 import ecs100.*;
 /**
- * Holds collection of books in a hashmap
+ * Holds collection of books in a hashmap.
  * Allows a user to add, find, print all
  *
  * @author (Phoebe Williamosn)
  * @version (3/4/23)
  */
-public class Books
-{
+public class Books {
     // instance variables
     private HashMap<Integer, Book> booksMap; // declare the hashmap
     private int currBookId;         // store the current id of book being added
     private Book currBook;          // store the instance of the found book
 
     /**
-     * Constructor for objects of class Books
+     * Constructor for objects of class Books.
      */
     public Books()
     {
@@ -25,7 +24,7 @@ public class Books
         // Create some books
         Book b1 = new Book("CELLPHONE", "STEPHEN KING",3, 86, 2016, "HORROR");
         Book b2 = new Book("PET CEMETARY", "STEPHEN KING", 3, 68, 1903, "HISTORY");
-        Book b3 = new Book("1984", "GEORGE ORWELL",3 , 63, 1949, "HISTORY");
+        Book b3 = new Book("1984", "GEORGE ORWELL", 3, 63, 1949, "HISTORY");
         
         // Add books to collection
         booksMap.put(1, b1);
@@ -36,15 +35,16 @@ public class Books
     }
 
     /**
-     * Adds book to hashmap
+     * Adds book to hashmap.
      */
-    public void addBook(String nm, String auth, int qty, int pgs, int year, String genre,  String img){
+    public void addBook(String nm, String auth, int qty, int pgs, int year, 
+                        String genre,  String img) {
         currBookId++;   // increment book id
         booksMap.put(currBookId, new Book(nm, auth, qty, pgs, year, genre, img));
     }
     
     /**
-     * Looks for book in hashmap
+     * Looks for book in hashmap.
      * @return boolean if found
      */
     public boolean findBook(String name) {
@@ -58,7 +58,7 @@ public class Books
     }
     
     /**
-     * prints all books in hashmap
+     * prints all books in hashmap.
      */
     public void printAll() {
         UI.println("Here are all of the books in the library");
@@ -75,15 +75,16 @@ public class Books
     }
     
     /**
-     * Getter for current Book
+     * Getter for current Book.
      * @return Book the found book instance
      */
     public Book getBook() {
         return this.currBook;
+        
     }
     
     /**
-     * 
+     * rmoves book from hasmap.
      */
     public void removeBook(String name) {
         for (int BookID : booksMap.keySet()) {

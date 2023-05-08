@@ -27,13 +27,13 @@ public class Book   {
   */
   public Book(String nm, String auth, int qty, int pgs, 
               int year, String genre, String img) {
-        // initialise instance variables
-        this.name = nm;
-        this.author = auth;
-        this.quantity = qty;
-        this.pages = pgs;
-        this.year = year;
-        this.genre = genre;
+    // initialise instance variables
+    this.name = nm;
+    this.author = auth;
+    this.quantity = qty;
+    this.pages = pgs;
+    this.year = year;
+    this.genre = genre;
         
         // If the user selects cancel instead of giving image
     if (img == null) {
@@ -57,6 +57,7 @@ public class Book   {
   */
   public String getName() {
     return this.name;
+    
   }
     
   /**
@@ -68,28 +69,37 @@ public class Book   {
     
   public String getAuthor() {
     return this.author;
+    
   }
     
   public int getQuantity() {
     return this.quantity;
+    
   } 
     
   public int getPages() {
     return this.pages;
+    
   }
   
     /**
      * getter for the year.
      */
-  public int getYear(){
+  public int getYear() {
     return this.year;
+    
+  }
+  
+  public void setQuantity(int amt) {
+      this.quantity = amt;
   }
   
     /**
      * getter for the genre.
      */
-  public String getGenre(){
+  public String getGenre() {
     return this.genre;
+    
   }
   
     /**
@@ -97,13 +107,19 @@ public class Book   {
      */
   public String getImage() {
     return this.image;
-  }
     
+  }
+  
+  /** 
+   * checks to see if it is clicked on.
+   */ 
   public boolean isOnBook(double x, double y) {
-    if ((x >= locX) && (x <= locX + WIDTH) && ( y >= locY) && ( y <= locY + HEIGHT)){
+    if ((x >= locX) && (x <= locX + WIDTH) && (y >= locY) && (y <= locY + HEIGHT)) {
         return true;
+        
     } else {
         return false;
+        
     }
   }
 }
